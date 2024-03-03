@@ -1,0 +1,73 @@
+{
+  "name": "sgc-front",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "odac",
+  "sourceRoot": "apps/sgc-front/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/sgc-front",
+        "index": "apps/sgc-front/src/index.html",
+        "browser": "apps/sgc-front/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/sgc-front/tsconfig.app.json",
+        "inlineStyleLanguage": "sass",
+        "assets": [
+          "apps/sgc-front/src/favicon.ico",
+          "apps/sgc-front/src/assets"
+        ],
+        "styles": ["apps/sgc-front/src/styles.sass"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "port": 40000,
+        "proxyConfig": "apps/sgc-front/proxy.conf.json"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "sgc-front:build:production"
+        },
+        "development": {
+          "buildTarget": "sgc-front:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "sgc-front:build"
+      }
+    }
+  }
+}
