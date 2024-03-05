@@ -17,7 +17,9 @@ export class PresentacionComponent implements OnInit {
   constructor(private presentacionService:PresentacionService){}
 
   ngOnInit(): void {
-    this.posts$=this.presentacionService.getRepos();
+    const data=this.presentacionService.getRepos();
+    console.log(data);
+
   }
 
     dos() {
